@@ -4,13 +4,15 @@
  */
 function buildQueryURL() {
   // queryURL is the url we'll use to query the API
-  var queryURL = "https://api.edamam.com/search?q=chicken&app_id=ddbdf056&app_key=31ae432b0845168eaf5f7feca2d703fa";
+  var searchTerm = $("#search-term").val().trim();
+  console.log(searchTerm);
+
+  var queryURL = "https://api.edamam.com/search?q=" + searchTerm;
 
   // add the api key parameter (the one we received when we registered)
   queryURL += "&app_id=ddbdf056&app_key=31ae432b0845168eaf5f7feca2d703fa";
 
   // grab text the user typed into the search input, add as parameter to url
-  var searchTerm = $("#search-term").val().trim();
   console.log(searchTerm);
   queryURL += "&q=" + searchTerm;
 
