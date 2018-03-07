@@ -3,10 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Recipe Search</title>
+  <title>JustForkIt</title>
   <!-- Bootswatch Styling for Improving the Aesthetics -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
-
   <!-- Font Awesome CSS Icons (For cool glyphicons) -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
@@ -15,79 +14,83 @@
     .panel-body a {
       word-break: break-all;
     }
-
     .articleHeadline {
       line-height: 1.5;
     }
   </style>
 </head>
-
+<body background="assets/images/back.jpg"></body>
 <body>
 
-  <!-- Main Bootstrap Search -->
+    <!-- Main Bootstrap Search -->
   <div class="container">
 
     <!-- Jumbotron for Title -->
-    <div class="jumbotron" style="background-color: #20315A ; color: white;">
+    <div class="jumbotron" style="background-color: #03a9f4 ; color: white;">
       <h1 class="text-center">
         <strong>Recipe Search</strong>
       </h1>
     </div>
 
+
+
     <!-- Row for Searching New York Times -->
     <div class="row">
       <div class="col-sm-12">
         <br>
-        <!-- First panel is for handling the search parameters -->
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              <strong>
-                <i class="fa  fa-list-alt"></i> Search Parameters</strong>
-            </h3>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="search-term">
+          <button type="button" id="run-search" class="btn btn-primary btn-lg btn-block" style="background-color: #03a9f4;">Search</button>
+        </div>
+            
           </div>
-          <div class="panel-body">
+          <div id="accordion">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Advanced Search
+                    </button>
+                  </h5>
+                </div>
 
-            <!-- Here we create an HTML Form for handling the inputs-->
-            <form role="form">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    <form role="form">
 
-              <!-- Here we create the text box for capturing the search term-->
-              <div class="form-group">
-                <label for="search">Search Ingredient</label>
-                <input type="text" class="form-control" id="search-term">
+                          <!-- Here we create the text box for capturing the search term-->
+                          
+
+                          <!-- Here we capture the number of records that the user wants to retrieve  -->
+                          <div class="form-group">
+                            <label for="pwd">Number of Recipes to Retrieve:</label>
+                            <select class="form-control" id="article-count">
+                              <option value="1">1</option>
+                              <!-- Setting the option for 5 as default -->
+                              <option value="5" selected>5</option>
+                              <option value="10">10</option>
+                            </select>
+                          </div>
+
+                          <!-- Here we capture the Start Year Parameter-->
+                          <div class="form-group">
+                            <label for="calories-label">Max Calories (Optional):</label>
+                            <input type="text" class="form-control" id="max-calories">
+                          </div>
+
+                          <!-- Here we have our final submit button -->
+                          
+
+                        </form>
+                  </div>
+                  
+                </div>
+                
               </div>
-
-              <!-- Here we capture the number of records that the user wants to retrieve  -->
-              <div class="form-group">
-                <label for="pwd">Number of Recipes to Retrieve:</label>
-                <select class="form-control" id="article-count">
-                  <option value="1">1</option>
-                  <!-- Setting the option for 5 as default -->
-                  <option value="5" selected>5</option>
-                  <option value="10">10</option>
-                </select>
-              </div>
-
-              <!-- Here we capture the Start Year Parameter-->
-              <div class="form-group">
-                <label for="calories-label">Max Calories (Optional):</label>
-                <input type="text" class="form-control" id="max-calories">
-              </div>
-
-              <!-- Here we have our final submit button -->
-              <button type="submit" class="btn btn-default" id="run-search">
-                <i class="fa fa-search"></i> Search</button>
-              <button type="button" class="btn btn-default" id="clear-all">
-                <i class="fa fa-trash"></i> Clear Results</button>
-
-            </form>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- This row will handle all of the retrieved articles -->
-    <div class="row">
+        <div class="row">
       <div class="col-sm-12">
         <br>
 
@@ -95,7 +98,7 @@
         <div class="panel panel-primary">
 
           <!-- Panel Heading for the retrieved articles box -->
-          <div class="panel-heading">
+          <div class="panel-heading" style="background-color: #03a9f4;">
             <h3 class="panel-title">
               <strong>
                 <i class="fa fa-table"></i> Top Results </strong>
@@ -108,6 +111,11 @@
         </div>
       </div>
     </div>
+  </div>
+      
+    
+
+
 
     <!-- Footer Region -->
     <div class="row">
@@ -127,6 +135,7 @@
 
   <!-- jQuery JS -->
   <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
   <!-- Code to the JavaScript File -->
   <script src="js/logic.js"></script>
