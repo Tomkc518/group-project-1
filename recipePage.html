@@ -4,10 +4,12 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Recipe Page</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link rel="shortcut icon" type="image/png" href="assets/Images/forkclever.png"/>
 </head>
 <body>
     <nav class="navbar justify-content-between">
@@ -21,7 +23,17 @@
         </form>
     </nav>
     
-    <nav class="navbar fixed-bottom justify-content-md-center">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div id="recipes">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="navbar fixed-bottom justify-content-md-center navbarBottom">
         <a class="navbar-brand h1" href="#">
             <img src="assets/Images/facebook.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Facebook Icon">
             Facebook
@@ -35,7 +47,6 @@
             Pinterest
         </a>
     </nav>
-
 
     <script src="assets/js/logic.js"></script>
 </body>
