@@ -26,11 +26,11 @@ function buildQueryURL() {
   //}
 
   // if the user provides an endYear, include it in the queryURL
-  var maxCalories = $("#max-calories").val().trim();
+  //var maxCalories = $("#max-calories").val().trim();
 
-  if (parseInt(maxCalories)) {
-    queryURL += "&calories=" + maxCalories;
-  }
+  // if (parseInt(maxCalories)) {
+  //   queryURL += "&calories=" + maxCalories;
+  // }
 
 
   // Logging the URL so we have access to it for troubleshooting
@@ -46,7 +46,7 @@ function buildQueryURL() {
 function updatePage(recipeData) {
   // get from the form the number of results to display
   // api doesn't have a "limit" parameter, so we have to do this ourselves
-  var numArticles = $("#article-count").val();
+  var numArticles = 10;
 
   // log the NYTData to console, where it will show up as an object
   console.log(numArticles);
@@ -58,42 +58,43 @@ function updatePage(recipeData) {
     // get specific article info for current index
     var recipeLabel = recipeData.hits[i].recipe.label;
     var recipeURL = recipeData.hits[i].recipe.url;
-    var recipeCalories = recipeData.hits[i].recipe.calories;
+    var recipeCalories = Math.floor(recipeData.hits[i].recipe.calories);
     var recipeImgSrc = recipeData.hits[i].recipe.image;
 
-    var card = $("<div class='card'>");
-    var cardImage = $("<img class='card-img-top' src='" + recipeImgSrc + "' alt='Card image cap'>");
-    var cardTitle = $("<h5 class='card-title'>" + recipeLabel)
-    var cardText = $("<p class='card-text'>Calories: " + recipeCalories);
+    var card = $("<div class='card float-left' style='width: 18rem'>");
+    var cardImage = $("<img class='card-img-top' src='" + recipeImgSrc + "' alt='Card image cap'/>");
+    var cardTitle = $("<h5 class='card-title'>" + recipeLabel + "</h5>")
+    var cardText = $("<p class='card-text'>Calories: " + recipeCalories + "</p>");
 
     card.append(cardImage, cardTitle, cardText);
-    $(#recipes).append(card);
+    $("#recipes").append(card)
 
+    console.log(card);
     console.log(recipeLabel);
     console.log(recipeURL);
     console.log(recipeCalories);
     console.log(recipeImgSrc);
 
     // increase the articleCount (track article # - starting at 1)
-    var articleCount = i + 1;
+    // var articleCount = i + 1;
 
-    // create the HTML well (section) and add the article content for each
-    var $articleWell = $("<article>");
-    $articleWell.addClass("well");
-    $articleWell.attr("id", "article-well-" + articleCount);
+    // // create the HTML well (section) and add the article content for each
+    // var $articleWell = $("<article>");
+    // $articleWell.addClass("well");
+    // $articleWell.attr("id", "article-well-" + articleCount);
 
-    // add the newly created element to the DOM
-    $("#well-section").append($articleWell);
+    // // add the newly created element to the DOM
+    // $("#well-section").append($articleWell);
 
-    // if the article has a headline, log and append to $articleWell
-    var headline = recipeLabel;
-    console.log(headline);
+    // // if the article has a headline, log and append to $articleWell
+    // var headline = recipeLabel;
+    // console.log(headline);
 
-    if (recipeImgSrc) {
-      var recipeImage = $("<img>");
-      recipeImage.attr("src", recipeImgSrc);
-      $articleWell.append(recipeImage);
-    }
+    // if (recipeImgSrc) {
+    //   var recipeImage = $("<img>");
+    //   recipeImage.attr("src", recipeImgSrc);
+    //   $articleWell.append(recipeImage);
+    // }
      
             
 
