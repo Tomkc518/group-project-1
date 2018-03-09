@@ -24,4 +24,6 @@ body {
 .card {
     color: black;
 }
-
+.col {
+    padding-bottom: 50px;
+}
