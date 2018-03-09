@@ -61,6 +61,14 @@ function updatePage(recipeData) {
     var recipeCalories = recipeData.hits[i].recipe.calories;
     var recipeImgSrc = recipeData.hits[i].recipe.image;
 
+    var card = $("<div class='card'>");
+    var cardImage = $("<img class='card-img-top' src='" + recipeImgSrc + "' alt='Card image cap'>");
+    var cardTitle = $("<h5 class='card-title'>" + recipeLabel)
+    var cardText = $("<p class='card-text'>Calories: " + recipeCalories);
+
+    card.append(cardImage, cardTitle, cardText);
+    $(#recipes).append(card);
+
     console.log(recipeLabel);
     console.log(recipeURL);
     console.log(recipeCalories);
@@ -89,27 +97,27 @@ function updatePage(recipeData) {
      
             
 
-    if (headline == true) {
-      console.log(headline);
+    // if (headline == true) {
+    //   console.log(headline);
 
-      $articleWell.append(
-        "<h3 class='articleHeadline'>" +
-        "<span class='label label-primary'>" + articleCount + "</span>" +
-        "<strong> " + headline + "</strong></h3>"
-      );
-    }
+    //   $articleWell.append(
+    //     "<h3 class='articleHeadline'>" +
+    //     "<span class='label label-primary'>" + articleCount + "</span>" +
+    //     "<strong> " + headline + "</strong></h3>"
+    //   );
+    // }
 
-    if (recipeLabel) {
-      $articleWell.append("<h5>" + recipeLabel + "</h5>");
-    }
+    // if (recipeLabel) {
+    //   $articleWell.append("<h5>" + recipeLabel + "</h5>");
+    // }
 
-    if (recipeCalories) {
-      $articleWell.append("<h5>" + Math.ceil(recipeCalories) + "</h5>");
-    }
+    // if (recipeCalories) {
+    //   $articleWell.append("<h5>" + Math.ceil(recipeCalories) + "</h5>");
+    // }
 
-    if (recipeURL) {
-      $articleWell.append("<h5>" + recipeURL + "</h5>");
-    }
+    // if (recipeURL) {
+    //   $articleWell.append("<h5>" + recipeURL + "</h5>");
+    // }
   }
 }
 
