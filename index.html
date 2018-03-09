@@ -1,43 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>JustForkIt</title>
-  <!-- Bootswatch Styling for Improving the Aesthetics -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
-  <!-- Font Awesome CSS Icons (For cool glyphicons) -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-  <!-- Style to fix the issue of text extending past panel length -->
-  <style>
-    .panel-body a {
-      word-break: break-all;
-    }
-    .articleHeadline {
-      line-height: 1.5;
-    }
-  </style>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Recipe Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 </head>
-<body background="assets/images/back.jpg"></body>
+
 <body>
-
-    <!-- Main Bootstrap Search -->
-  <div class="container">
-
-    <!-- Jumbotron for Title -->
-    <div class="jumbotron" style="background-color: #03a9f4 ; color: white;">
-      <h1 class="text-center">
-        <strong>Recipe Search</strong>
-      </h1>
-    </div>
-
-
-
-    <!-- Row for Searching New York Times -->
+<body background="assets/images/back.jpg"></body>
+    
     <div class="row">
       <div class="col-sm-12">
         <br>
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">Just Fork It!</h1>
+          </div>
+        </div>
 
         <div class="form-group">
           <input type="text" class="form-control" id="search-term">
@@ -59,12 +42,9 @@
                   <div class="card-body">
                     <form role="form">
 
-                          <!-- Here we create the text box for capturing the search term-->
-                          
-
                           <!-- Here we capture the number of records that the user wants to retrieve  -->
                           <div class="form-group">
-                            <label for="pwd">Number of Recipes to Retrieve:</label>
+                            <h5 style="color: black;">Number of Recipes</h5>
                             <select class="form-control" id="article-count">
                               <option value="1">1</option>
                               <!-- Setting the option for 5 as default -->
@@ -75,13 +55,9 @@
 
                           <!-- Here we capture the Start Year Parameter-->
                           <div class="form-group">
-                            <label for="calories-label">Max Calories (Optional):</label>
+                            <h5 style="color: black;">Max Calories</h5>
                             <input type="text" class="form-control" id="max-calories">
                           </div>
-
-                          <!-- Here we have our final submit button -->
-                          
-
                         </form>
                   </div>
                   
@@ -90,14 +66,16 @@
               </div>
           </div>
         </div>
+        <!--
         <div class="row">
         <div class="col-sm-12">
         <br>
 
-        <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
+         This panel will initially be made up of a panel and wells for each of the articles retrieved -->
+        <!--
         <div class="panel panel-primary">
 
-          <!-- Panel Heading for the retrieved articles box -->
+          
           <div class="panel-heading" style="background-color: #03a9f4;">
             <h3 class="panel-title">
               <strong>
@@ -105,41 +83,32 @@
             </h3>
           </div>
 
-          <!-- This main panel will hold each of the resulting articles -->
+         
           <div class="panel-body" id="well-section">
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
-      
-    
 
+    <nav class="navbar fixed-bottom justify-content-md-center">
+        <a class="navbar-brand h1" href="#">
+            <img src="assets/Images/facebook.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Facebook Icon">
+            Facebook
+        </a>
+        <a class="navbar-brand h1" href="#">
+            <img src="assets/Images/twitter.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Facebook Icon">
+            Twitter
+        </a>
+        <a class="navbar-brand h1" href="#">
+            <img src="assets/Images/pinterest.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Facebook Icon">
+            Pinterest
+        </a>
+    </nav>
 
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <!-- Footer Region -->
-    <div class="row">
-      <div class="col-sm-12">
-
-        <!-- Line Break followed by closing -->
-        <hr>
-        <h5 class="text-center">
-          <small>Tristan Van Hook, Thomas Fuller, Donald Black and Crystal Hughes
-          </small>
-        </h5>
-
-      </div>
-    </div>
-
-  </div>
-
-  <!-- jQuery JS -->
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-  <!-- Code to the JavaScript File -->
-  <script src="assets/js/logic.js"></script>
-
+    <script src="assets/js/logic.js"></script>
 </body>
-
 </html>
