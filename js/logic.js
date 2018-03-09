@@ -45,7 +45,7 @@ function buildQueryURL() {
 function updatePage(recipeData) {
   // get from the form the number of results to display
   // api doesn't have a "limit" parameter, so we have to do this ourselves
-  var numArticles = $("#article-count").val();
+  var numArticles = 10
 
   // log the NYTData to console, where it will show up as an object
   console.log(numArticles);
@@ -77,7 +77,7 @@ function updatePage(recipeData) {
     // if the article has a headline, log and append to $articleWell
     var headline = recipeLabel;
     console.log(headline);
-
+    /*
     if (headline == true) {
       console.log(headline);
 
@@ -99,6 +99,7 @@ function updatePage(recipeData) {
     if (recipeURL) {
       $articleWell.append("<h5>" + recipeURL + "</h5>");
     }
+    */
   }
 }
 
@@ -129,6 +130,9 @@ $("#run-search").on("click", function (event) {
     url: queryURL,
     method: "GET"
   }).then(updatePage);
+
+
+
 });
 
 //  .on("click") function associated with the clear button
