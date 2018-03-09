@@ -37,6 +37,7 @@ function updatePage(recipeData) {
     var recipeLabel = recipeData.hits[i].recipe.label;
     var recipeURL = recipeData.hits[i].recipe.url;
     var recipeCalories = recipeData.hits[i].recipe.calories;
+    
 
     console.log(recipeLabel);
     console.log(recipeURL);
