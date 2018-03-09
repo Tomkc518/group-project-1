@@ -61,7 +61,7 @@ function updatePage(recipeData) {
     var recipeCalories = Math.floor(recipeData.hits[i].recipe.calories);
     var recipeImgSrc = recipeData.hits[i].recipe.image;
 
-    var card = $("<div class='card float-left' style='width: 18rem'>");
+    var card = $("<div class='card m-3' style='width: 20rem'>");
     var cardImage = $("<img class='card-img-top' src='" + recipeImgSrc + "' alt='Card image cap'/>");
     var cardTitle = $("<h5 class='card-title'>" + recipeLabel + "</h5>")
     var cardText = $("<p class='card-text'>Calories: " + recipeCalories + "</p>");
