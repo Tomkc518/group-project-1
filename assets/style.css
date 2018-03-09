@@ -4,3 +4,10 @@ body {
 .navbar {
     background-color: #03a9f4;
 }
+.jumbotron {
+	background-color: transparent;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+
+}
