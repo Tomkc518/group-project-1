@@ -138,8 +138,8 @@ $("#run-search").on("click", function (event) {
   event.preventDefault();
 
   // empty the region associated with the articles
-  if ($("#search-term") == "") {
-    $('#exampleModalCenter').modal('show')
+  if ($("#search-term") === "") {
+    $('#exampleModalCenter').modal('show');
   } else {
 
     clear();
