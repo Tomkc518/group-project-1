@@ -27,3 +27,27 @@ body {
 .col {
     padding-bottom: 50px;
 }
+
+#fork-in {
+    color: white;
+    padding-top: 12%;
+    height: 100%;
+    margin-top: 15%;
+    text-align: center;
+    background-color: #03a9f4;
+}
+
+#fork-out {
+    color: white;
+    padding-top: 12%;
+    height: 100%;
+    margin-top: 15%;
+    text-align: center;
+    background-color: #f44e03;
+}
+
+#index-nav {
+    background-color: #f4c703;
+}
+
+
