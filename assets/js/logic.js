@@ -138,22 +138,17 @@ $("#run-search").on("click", function (event) {
   event.preventDefault();
 
   // empty the region associated with the articles
-  if ($("#search-term") === "") {
-    $('#exampleModalCenter').modal('show');
-  } else {
+  clear();
 
-    clear();
+  // build the query URL for the ajax request to the NYT API
+  var queryURL = buildQueryURL();
 
-    // build the query URL for the ajax request to the NYT API
-    var queryURL = buildQueryURL();
-
-    // make the AJAX request to the API - GETs the JSON data at the queryURL.
-    // the data then gets passed as an argument to the updatePage function
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(updatePage);
-  };
+  // make the AJAX request to the API - GETs the JSON data at the queryURL.
+  // the data then gets passed as an argument to the updatePage function
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(updatePage);
 });
 
 //  .on("click") function associated with the clear button
