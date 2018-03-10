@@ -136,6 +136,10 @@ $("#run-search").on("click", function (event) {
   // This way we can hit enter on the keyboard and it registers the search
   // (in addition to clicks). Prevents the page from reloading on form submit.
   event.preventDefault();
+  var searchTerm = $("#search-term").val().trim();
+  if (searchTerm == "") {
+    
+  }
 
   // empty the region associated with the articles
   clear();
