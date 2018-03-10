@@ -82,7 +82,7 @@ function updatePage(recipeData) {
 
 
 function clear() {
-  $("#recipes").empty();
+  $("#well-selection").empty();
 }
 
 $("#run-search").on("click", function (event) {
