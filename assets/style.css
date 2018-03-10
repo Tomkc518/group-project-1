@@ -31,18 +31,18 @@ body {
 
 #fork-in {
     color: white;
-    padding-top: 12%;
+    padding-top: 14%;
     height: 100%;
-    margin-top: 15%;
+    margin-top: 18%;
     text-align: center;
     background-color: #03a9f4;
 }
 
 #fork-out {
     color: white;
-    padding-top: 12%;
+    padding-top: 14%;
     height: 100%;
-    margin-top: 15%;
+    margin-top: 18%;
     text-align: center;
     background-color: #f44e03;
 }
