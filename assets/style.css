@@ -29,6 +29,10 @@ body {
     padding-bottom: 50px;
 }
 
+.card-img-top:hover {
+    box-shadow: 10px 10px 8px #888888;
+}
+
 #fork-in {
     color: white;
     padding-top: 14%;
@@ -50,5 +54,4 @@ body {
 #index-nav {
     background-color: #f4c703;
 }
-
 
