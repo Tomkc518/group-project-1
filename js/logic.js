@@ -37,7 +37,6 @@ function updatePage(recipeData) {
     var recipeLabel = recipeData.hits[i].recipe.label;
     var recipeURL = recipeData.hits[i].recipe.url;
     var recipeCalories = recipeData.hits[i].recipe.calories;
-    
 
     console.log(recipeLabel);
     console.log(recipeURL);
@@ -83,7 +82,7 @@ function updatePage(recipeData) {
 
 
 function clear() {
-  $("#well-section").empty();
+  $("#recipes").empty();
 }
 
 $("#run-search").on("click", function (event) {
@@ -100,4 +99,3 @@ $("#run-search").on("click", function (event) {
   }).then(updatePage);
 });
 
-$("#clear-all").on("click", clear);

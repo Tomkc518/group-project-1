@@ -61,9 +61,9 @@ function updatePage(recipeData) {
     var recipeCalories = Math.floor(recipeData.hits[i].recipe.calories);
     var recipeImgSrc = recipeData.hits[i].recipe.image;
 
-    var card = $("<div class='card m-3' style='width: 20rem'>");
-    var cardImage = $("<a href='" + recipeURL + "'><img class='card-img-top' src='" + recipeImgSrc + "' alt='Card image cap'/>");
-    var cardTitle = $("<h5 class='card-title'>" + recipeLabel + "</h5>")
+    var card = $("<div class='card mt-5' style='width: 20rem'>");
+    var cardImage = $("<a href='" + recipeURL + "' target='blank'><img class='card-img-top rounded' src='" + recipeImgSrc + "' alt='Card image cap'/>");
+    var cardTitle = $("<h5 class='card-title mt-3'>" + recipeLabel + "</h5>")
     var cardText = $("<p class='card-text'>Calories: " + recipeCalories + "</p>");
 
     card.append(cardImage, cardTitle, cardText);
@@ -124,7 +124,7 @@ function updatePage(recipeData) {
 
 // function to empty out the articles
 function clear() {
-  $("#well-section").empty();
+  $("#recipes").empty();
 }
 
 // CLICK HANDLERS
@@ -138,17 +138,22 @@ $("#run-search").on("click", function (event) {
   event.preventDefault();
 
   // empty the region associated with the articles
-  clear();
+  if ($("#search-term") == "") {
+    $('#exampleModalCenter').modal('show')
+  } else {
 
-  // build the query URL for the ajax request to the NYT API
-  var queryURL = buildQueryURL();
+    clear();
 
-  // make the AJAX request to the API - GETs the JSON data at the queryURL.
-  // the data then gets passed as an argument to the updatePage function
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(updatePage);
+    // build the query URL for the ajax request to the NYT API
+    var queryURL = buildQueryURL();
+
+    // make the AJAX request to the API - GETs the JSON data at the queryURL.
+    // the data then gets passed as an argument to the updatePage function
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(updatePage);
+  };
 });
 
 //  .on("click") function associated with the clear button

@@ -28,3 +28,33 @@ body {
 .col {
     padding-bottom: 50px;
 }
+
+<<<<<<< HEAD
+.card-img-top:hover {
+    box-shadow: 10px 10px 8px #888888;
+}
+=======
+#fork-in {
+    color: white;
+    padding-top: 14%;
+    height: 100%;
+    margin-top: 18%;
+    text-align: center;
+    background-color: #03a9f4;
+}
+
+#fork-out {
+    color: white;
+    padding-top: 14%;
+    height: 100%;
+    margin-top: 18%;
+    text-align: center;
+    background-color: #f44e03;
+}
+
+#index-nav {
+    background-color: #f4c703;
+}
+
+
+>>>>>>> b7ea52d2add6c7c1d0946738a441970f755f34ed
