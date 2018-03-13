@@ -1,120 +1,133 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Google Map Search</title>
-    <style>
+
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Google Map Search</title>
+  <style>
+    #map {
+      height: 100%;
+      width: 50%;
+      float: right;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #right-panel {
+      font-family: 'Roboto', 'sans-serif';
+      line-height: 30px;
+      padding-left: 10px;
+    }
+
+    #right-panel select,
+    #right-panel input {
+      font-size: 15px;
+    }
+
+    #right-panel select {
+      width: 100%;
+    }
+
+    #right-panel i {
+      font-size: 12px;
+    }
+
+    #right-panel {
+      font-family: Arial, Helvetica, sans-serif;
+      position: absolute;
+      right: 5px;
+      top: 70%;
+      margin-top: -195px;
+      height: 330px;
+      width: 200px;
+      padding: 5px;
+      z-index: 5;
+      border: 1px solid #999;
+      background: #fff;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin: 0 0 5px 0;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      height: 271px;
+      width: 200px;
+      overflow-y: scroll;
+    }
+
+    li {
+      background-color: #f1f1f1;
+      padding: 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    li:nth-child(odd) {
+      background-color: #fcfcfc;
+    }
+
+    #more {
+      width: 100%;
+      margin: 5px 0 0 0;
+    }
+
+    #search-input {
+      background-color: #fff;
+      font-family: Roboto;
+      font-size: 15px;
+      font-weight: 300;
+      margin-left: 12px;
+      padding: 0 11px 0 13px;
+      text-overflow: ellipsis;
+      width: 400px;
+      float: right;
+      position: absolute;
+    }
+
+
+
+    .search-container {
+      font-family: Roboto;
+      float: right;
+    }
+
+    #type-selector {
+      color: #fff;
+      background-color: #4d90fe;
+      padding: 5px 11px 0px 11px;
+    }
+
+    #type-selector label {
+      font-family: Roboto;
+      font-size: 13px;
+      font-weight: 300;
+    }
+  </style>
+  <script>
+    // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD71_8tH1R7K9kO5eMaHugGpN53buPRBpY&libraries=places">
    
-      #map {
-        height: 100%;
-        width: 50%;
-        float: right;
-      }
-      
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #right-panel {
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
 
-      #right-panel select, #right-panel input {
-        font-size: 15px;
-      }
-
-      #right-panel select {
-        width: 100%;
-      }
-
-      #right-panel i {
-        font-size: 12px;
-      }
-      #right-panel {
-        font-family: Arial, Helvetica, sans-serif;
-        position: absolute;
-        right: 5px;
-        top: 70%;
-        margin-top: -195px;
-        height: 330px;
-        width: 200px;
-        padding: 5px;
-        z-index: 5;
-        border: 1px solid #999;
-        background: #fff;
-      }
-      h2 {
-        font-size: 22px;
-        margin: 0 0 5px 0;
-      }
-      ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        height: 271px;
-        width: 200px;
-        overflow-y: scroll;
-      }
-      li {
-        background-color: #f1f1f1;
-        padding: 10px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-      li:nth-child(odd) {
-        background-color: #fcfcfc;
-      }
-      #more {
-        width: 100%;
-        margin: 5px 0 0 0;
-      }
-       #search-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
-        float: right;
-        position: absolute;
-      }
-
-      
-
-      .search-container {
-        font-family: Roboto;
-        float: right;
-      }
-
-      #type-selector {
-        color: #fff;
-        background-color: #4d90fe;
-        padding: 5px 11px 0px 11px;
-      }
-
-      #type-selector label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-
-    </style>
-    <script>
-     
-      // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD71_8tH1R7K9kO5eMaHugGpN53buPRBpY&libraries=places">
 
       var map;
-//initalizes the map, added longitude / latitude to Overland Park- zoom in feature is quite annoying but useful
+      //initalizes the map, added longitude / latitude to Overland Park- zoom in feature is quite annoying but useful
       function initMap() {
         // Create the map.
-        var kansas = {lat: 38.9822, lng: -94.6708};
+        var kansas = {
+          lat: 38.9822,
+          lng: -94.6708
+        };
         map = new google.maps.Map(document.getElementById('map'), {
           center: kansas,
           zoom: 17
@@ -124,25 +137,28 @@
         var service = new google.maps.places.PlacesService(map);
         var getNextPage = null;
         var moreButton = document.getElementById('more');
-        moreButton.onclick = function() {
+        moreButton.onclick = function () {
           moreButton.disabled = true;
           if (getNextPage) getNextPage();
         };
 
         // Perform a nearby search.
-        service.nearbySearch(
-            {location: kansas, radius: 700, type: ['restaurant']},
-            function(results, status, pagination) {
-              if (status !== 'OK') return;
+        service.nearbySearch({
+            location: kansas,
+            radius: 1000,
+            type: ['restaurant']
+          },
+          function (results, status, pagination) {
+            if (status !== 'OK') return;
 
-              createMarkers(results);
-              moreButton.disabled = !pagination.hasNextPage;
-              getNextPage = pagination.hasNextPage && function() {
-                pagination.nextPage();
-              };
-            });
+            createMarkers(results);
+            moreButton.disabled = !pagination.hasNextPage;
+            getNextPage = pagination.hasNextPage && function () {
+              pagination.nextPage();
+            };
+          });
       }
-// this creates local map markers
+      // this creates local map markers
       function createMarkers(places) {
         var bounds = new google.maps.LatLngBounds();
         var placesList = document.getElementById('places');
@@ -171,32 +187,35 @@
         }
         map.fitBounds(bounds);
       }
-//searchbox is currently not working as intended
-var button = document.getElementById('#pac-input');
-var searchbox = document.getElementById('#pac-input');
+      //searchbox is currently not working as intended
+      window.onload = (function () {
+      var button = document.getElementById('#pac-input');
+      var searchbox = document.getElementById('#pac-input');
 
-button.onclick = function () {
-  var location = pac-input.value;
-  initMap(location);
-}
-    </script>
-  </head>
-  <body>
-    <div id="map"></div>
-      <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <div  id="map-canvas"></div>
-    <div id="right-panel">
-      <h2>Results</h2>
-      <ul id="places"></ul>
-      <button id="more">More results</button>
-    </div>
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD71_8tH1R7K9kO5eMaHugGpN53buPRBpY&libraries=places&callback=initMap" async defer></script>
- 
-  </body>
+      $("#search").on("click", function () {
+        console.log("on click works");
+        var location = $("#pac-input").val().trim();
+        console.log(location);
+       
+        initMap(location);
+      })
+    });
+  </script>
+</head>
+
+<body>
+  <div id="map"></div>
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+  <button id="search">Search</button>
+  <div id="map-canvas"></div>
+  <div id="right-panel">
+    <h2>Results</h2>
+    <ul id="places"></ul>
+    <button id="more">More results</button>
+  </div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD71_8tH1R7K9kO5eMaHugGpN53buPRBpY&libraries=places&callback=initMap"
+    async defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
 </html>
-
-
-
-
-
-
