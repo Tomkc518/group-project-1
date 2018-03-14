@@ -1,3 +1,5 @@
+$('.covervid-video').coverVid(1920, 1080);
+
 /**
  * pulls information from the form and build the query URL
  * @returns {string} URL for NYT API based on form inputs
@@ -162,5 +164,6 @@ $("#run-search").on("click", function (event) {
 
 //  .on("click") function associated with the clear button
 $("#clear-all").on("click", clear);
+
 
 
