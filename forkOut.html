@@ -7,9 +7,10 @@
   <title>Google Map Search</title>
   <style>
     #map {
-      height: 100%;
-      width: 50%;
-      float: right;
+      height: 72%;
+      width: 100%;
+      top: 5%;
+      margin-bottom: 25%;
     }
 
     html,
@@ -57,50 +58,11 @@
       margin: 0 0 5px 0;
     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-      height: 271px;
-      width: 200px;
-      overflow-y: scroll;
-    }
 
-    li {
-      background-color: #f1f1f1;
-      padding: 10px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
-    li:nth-child(odd) {
-      background-color: #fcfcfc;
-    }
 
     #more {
       width: 100%;
       margin: 5px 0 0 0;
-    }
-
-    #search-input {
-      background-color: #fff;
-      font-family: Roboto;
-      font-size: 15px;
-      font-weight: 300;
-      margin-left: 12px;
-      padding: 0 11px 0 13px;
-      text-overflow: ellipsis;
-      width: 400px;
-      float: right;
-      position: absolute;
-    }
-
-
-
-    .search-container {
-      font-family: Roboto;
-      float: right;
     }
 
     #type-selector {
@@ -116,92 +78,86 @@
     }
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <link rel="shortcut icon" type="image/png" href="assets/Images/forkclever.png"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link rel="shortcut icon" type="image/png" href="assets/Images/forkclever.png" />
   <script>
     // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD71_8tH1R7K9kO5eMaHugGpN53buPRBpY&libraries=places">
-   
 
 
-      var map;
-      //initalizes the map, added longitude / latitude to Overland Park- zoom in feature is quite annoying but useful
-      function initMap() {
-        // Create the map.
-        var kansas = {
-          lat: 38.9822,
-          lng: -94.6708
+
+    var map;
+    //initalizes the map, added longitude / latitude to Overland Park- zoom in feature is quite annoying but useful
+    function initMap() {
+      // Create the map.
+      var kansas = {
+        lat: 38.9822,
+        lng: -94.6708
+      };
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: kansas,
+        zoom: 17
+      });
+
+      // Create the places service.
+      var service = new google.maps.places.PlacesService(map);
+      var getNextPage = null;
+
+
+      // Perform a nearby search.
+      service.nearbySearch({
+        location: kansas,
+        radius: 1000,
+        type: ['restaurant']
+      },
+        function (results, status, pagination) {
+          if (status !== 'OK') return;
+
+          createMarkers(results);
+
+          getNextPage = pagination.hasNextPage && function () {
+            pagination.nextPage();
+          };
+        });
+    }
+    // this creates local map markers
+    function createMarkers(places) {
+      var bounds = new google.maps.LatLngBounds();
+      var placesList = document.getElementById('places');
+
+      for (var i = 0, place; place = places[i]; i++) {
+        var image = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
         };
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: kansas,
-          zoom: 17
+
+        var marker = new google.maps.Marker({
+          map: map,
+          icon: image,
+          title: place.name,
+          position: place.geometry.location
         });
 
-        // Create the places service.
-        var service = new google.maps.places.PlacesService(map);
-        var getNextPage = null;
-        var moreButton = document.getElementById('more');
-        moreButton.onclick = function () {
-          moreButton.disabled = true;
-          if (getNextPage) getNextPage();
-        };
-
-        // Perform a nearby search.
-        service.nearbySearch({
-            location: kansas,
-            radius: 1000,
-            type: ['restaurant']
-          },
-          function (results, status, pagination) {
-            if (status !== 'OK') return;
-
-            createMarkers(results);
-            moreButton.disabled = !pagination.hasNextPage;
-            getNextPage = pagination.hasNextPage && function () {
-              pagination.nextPage();
-            };
-          });
+        bounds.extend(place.geometry.location);
       }
-      // this creates local map markers
-      function createMarkers(places) {
-        var bounds = new google.maps.LatLngBounds();
-        var placesList = document.getElementById('places');
-
-        for (var i = 0, place; place = places[i]; i++) {
-          var image = {
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-          };
-
-          var marker = new google.maps.Marker({
-            map: map,
-            icon: image,
-            title: place.name,
-            position: place.geometry.location
-          });
-
-          var li = document.createElement('li');
-          li.textContent = place.name;
-          placesList.appendChild(li);
-
-          bounds.extend(place.geometry.location);
-        }
-        map.fitBounds(bounds);
-      }
-      //searchbox is currently not working as intended
-      window.onload = (function () {
+      map.fitBounds(bounds);
+    }
+    //searchbox is currently not working as intended
+    window.onload = (function () {
       var button = document.getElementById('#pac-input');
       var searchbox = document.getElementById('#pac-input');
 
       $("#search").on("click", function () {
+        event.preventDefault();
         console.log("on click works");
         var location = $("#pac-input").val().trim();
         console.log(location);
-       
+
         initMap(location);
       })
     });
@@ -209,40 +165,37 @@
 </head>
 
 <body>
-    <nav class="navbar" id="out-nav">
-        <div>
-            <a class="navbar-brand h1" href="index.html">Just Fork Out</a>
-            <i class="fas fa-utensils fa-lg ml-0"></i>
-        </div>
-        <form class="form-inline">
-            <input class="form-control mr-1 col-8" type="search" placeholder="Main-Ingredient" aria-label="Search" id="search-term">
-            <button class="btn btn-light my-2 my-sm-0" type="submit" id="run-search">Search</button>
-        </form>
-    </nav>
-  <div id="map"></div>
-  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-  <button id="search">Search</button>
+  <nav class="navbar" id="out-nav">
+    <div>
+      <a class="navbar-brand h1" href="index.html">Just Fork Out</a>
+      <i class="fas fa-utensils fa-lg ml-0"></i>
+    </div>
+    <form class="form-inline">
+      <input class="form-control mr-1 col-8 controls" type="search" placeholder="Restaurant" aria-label="Search" id="pac-input">
+      <button class="btn btn-light my-2 my-sm-0 search-container" type="submit" id="search">Search</button>
+    </form>
+  </nav>
+
+  <div id="map" class="mb-sm-0"></div>
   <div id="map-canvas"></div>
-  <div id="right-panel">
-    <h2>Results</h2>
-    <ul id="places"></ul>
-    <button id="more">More results</button>
-  </div>
+
+
   <nav class="navbar fixed-bottom justify-content-md-center navbarBottom" id="out-nav">
 
-            <a class="navbar-brand h1" href="#">
-            <img src="assets/Images/facebook.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Facebook Icon">
-             </a>
-            <a class="navbar-brand h1" href="#">
-                <img src="assets/Images/twitter.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Twitter Icon">
-            </a>
-            <a class="navbar-brand h1" href="#">
-                <img src="assets/Images/pinterest.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Pinterest Icon">
-            </a>
-            <a class="navbar-brand h1" href="#">
-                <img src="assets/Images/Instagram.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Instagram Icon">
-            </a>
-        </nav>
+    <a class="navbar-brand h1" href="#">
+      <img src="assets/Images/facebook.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Facebook Icon">
+    </a>
+    <a class="navbar-brand h1" href="#">
+      <img src="assets/Images/twitter.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Twitter Icon">
+    </a>
+    <a class="navbar-brand h1" href="#">
+      <img src="assets/Images/pinterest.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Pinterest Icon">
+    </a>
+    <a class="navbar-brand h1" href="#">
+      <img src="assets/Images/Instagram.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Instagram Icon">
+    </a>
+  </nav>
+
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD71_8tH1R7K9kO5eMaHugGpN53buPRBpY&libraries=places&callback=initMap"
     async defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
