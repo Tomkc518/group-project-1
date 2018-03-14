@@ -14,12 +14,18 @@
 
 <body>
 
-  <div class="covervid-wrapper">
-       <video class="covervid-video" autoplay loop poster="assets/Images/Indian-Pedestrian.mp4">
-           <source src="assets/Images/Indian-Pedestrian.mp4" type="video/mp4">
-       </video>
-   </div>
-    <nav class="navbar justify-content-between" id="index-nav">
+  <div class="homepage-hero-module">
+    <div class="video-container">
+        <div class="filter"></div>
+        <video autoplay loop class="fillWidth">
+            <source src="assets/Images/Indian-Pedestrian.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+            <source src="assets/Images/Indian-Pedestrian.mp4" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+        </video>
+        <div class="poster hidden">
+            <img src="assets/Images/Indian-Pedestrian.mp4" alt="">
+        </div>
+
+      <nav class="navbar justify-content-between" id="index-nav">
         <div>
             <a class="navbar-brand h1" href="index.html">Just Fork It</a>
             <i class="fas fa-utensils fa-lg ml-0"></i>
@@ -73,6 +79,10 @@
                 <img src="assets/Images/Instagram.png" width="30" height="30" class="d-inline-block align-top rounded" alt="Instagram Icon">
             </a>
         </nav>
+
+    </div>
+</div>
+    
 
 
 
