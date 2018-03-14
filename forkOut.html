@@ -85,86 +85,116 @@
   <link rel="shortcut icon" type="image/png" href="assets/Images/forkclever.png" />
   <script>
     // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD71_8tH1R7K9kO5eMaHugGpN53buPRBpY&libraries=places">
-
-
-
-    var map;
-    //initalizes the map, added longitude / latitude to Overland Park- zoom in feature is quite annoying but useful
-    function initMap() {
-      // Create the map.
-      var kansas = {
-        lat: 38.9822,
-        lng: -94.6708
-      };
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: kansas,
-        zoom: 17
-      });
-
-      // Create the places service.
-      var service = new google.maps.places.PlacesService(map);
-      var getNextPage = null;
-
-
-      // Perform a nearby search.
-      service.nearbySearch({
-        location: kansas,
-        radius: 1000,
-        type: ['restaurant']
-      },
-        function (results, status, pagination) {
-          if (status !== 'OK') return;
-
-          createMarkers(results);
-
-          getNextPage = pagination.hasNextPage && function () {
-            pagination.nextPage();
-          };
-        });
-    }
-    // this creates local map markers
-    function createMarkers(places) {
-      var bounds = new google.maps.LatLngBounds();
-      var placesList = document.getElementById('places');
-
-      for (var i = 0, place; place = places[i]; i++) {
-        var image = {
-          url: place.icon,
-          size: new google.maps.Size(71, 71),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(17, 34),
-          scaledSize: new google.maps.Size(25, 25)
+   
+       var kansas = {
+          lat: 38.9822,
+          lng: -94.6708
         };
-
-        var marker = new google.maps.Marker({
-          map: map,
-          icon: image,
-          title: place.name,
-          position: place.geometry.location
+      var map, service, markers;
+      //initalizes the map, added longitude / latitude to Overland Park- zoom in feature is quite annoying but useful
+      function initMap() {
+        // Create the map.
+       
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: kansas,
+          zoom: 17
         });
-
-        bounds.extend(place.geometry.location);
+        // Create the places service.
+        service = new google.maps.places.PlacesService(map);
+        var getNextPage = null;
+        
+        // Perform a nearby search.
+        service.nearbySearch({
+            location: kansas,
+            radius: 1000,
+            type: ['places']
+            
+          },
+          function (results, status, pagination) {
+            if (status !== 'OK') return;
+            createMarkers(results);
+            
+            getNextPage = pagination.hasNextPage && function () {
+              pagination.nextPage();
+            };
+          });
       }
-      map.fitBounds(bounds);
-    }
-    //searchbox is currently not working as intended
-    window.onload = (function () {
-      var button = document.getElementById('#pac-input');
-      var searchbox = document.getElementById('#pac-input');
-
-      $("#search").on("click", function () {
-        event.preventDefault();
-        console.log("on click works");
-        var location = $("#pac-input").val().trim();
-        console.log(location);
-
-        initMap(location);
-      })
-    });
+      // this creates local map markers
+      function createMarkers(places) {
+        var bounds = new google.maps.LatLngBounds();
+        var placesList = document.getElementById('places');
+        markers = [];
+        for (var i = 0, place; place = places[i]; i++) {
+          var image = {
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25)
+          };
+          var marker = new google.maps.Marker({
+            map: map,
+            icon: image,
+            title: place.name,
+            position: place.geometry.location
+          });
+          markers.push(marker);
+         
+          bounds.extend(place.geometry.location);
+        }
+        map.fitBounds(bounds);
+      }
+      //searchbox is currently not working as intended
+      window.onload = (function () {
+        var button = document.getElementById('#pac-input');
+        var searchbox = document.getElementById('#pac-input');
+        $("#search").on("click", function () {
+          event.preventDefault();
+          console.log("on click works");
+          var location = $("#pac-input").val().trim();
+          console.log(location);
+           service.nearbySearch({
+              location: kansas,
+              radius: 1000,
+              type: ['places'],
+              keyword: location
+            },
+            function (results, status, pagination) {
+              if (status !== 'OK') return;
+              markers.forEach(function(marker) {
+                marker.setMap(null);
+              });
+              
+              createMarkers(results);
+            });
+         
+        });
+      });
   </script>
 </head>
 
 <body>
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center">What the Fork are you Doing!?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">You can't search like that!</p>
+                    <p>You are getting this message because you are searching really bad. Please enter a real word! No special
+                        characters or any silly stuff like that. And don't try to just leave it blank either!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary block-center" data-dismiss="modal">Try Again!</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
   <nav class="navbar" id="out-nav">
     <div>
       <a class="navbar-brand h1" href="index.html">Just Fork Out</a>
