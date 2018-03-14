@@ -32,8 +32,6 @@ a {
 
 }
 
-
-
 .card {
     color: black;
 }
@@ -71,3 +69,7 @@ a {
     background-color: #f44e03;
 }
 
+.modal-title,
+.modal-body {
+    color: black;
+}
