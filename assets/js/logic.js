@@ -109,7 +109,7 @@ function buildQueryURL() {
 function updatePage(recipeData) {
   // get from the form the number of results to display
   // api doesn't have a "limit" parameter, so we have to do this ourselves
-  var numArticles = 10;
+  var numArticles = 9;
 
   // log the NYTData to console, where it will show up as an object
   console.log(numArticles);
