@@ -54,11 +54,13 @@ a {
 }
 
 #fork-header {
-    color: #f4c703;
+    background-color: #f4c703;
     text-align: center;
-    padding-top: 5%;
-    padding-right: 10%;
-    padding-left: 10%;
+    margin: 5%;
+    padding: 1%;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .navbar {
@@ -91,6 +93,11 @@ a {
 
 .card-img-top:hover {
     box-shadow: 10px 10px 8px #888888;
+}
+
+.mainCard:hover,
+.bottomNav:hover {
+    box-shadow: 10px 10px 8px rgb(31, 29, 29);
 }
 
 #fork-in {
